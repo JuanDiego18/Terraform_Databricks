@@ -23,4 +23,7 @@ jobs:
       #run:
         #working-directory: ./scripts
     steps:
+
+      - uses: actions/checkout@v4 # Checks out your repository into the runner allowing you to run scripts or other actions against your code 
+      
     
