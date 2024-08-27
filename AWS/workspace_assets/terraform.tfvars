@@ -1,0 +1,9 @@
+databricks_cli_profile = "juandiego_OneEnv_dev_workspace"
+notebook_subdirectory = "Terraform"
+notebook_filename     = "notebook-getting-started.py"
+notebook_language     = "PYTHON"
+cluster_name                    = "My Cluster"
+cluster_autotermination_minutes = 60
+cluster_num_workers             = 1
+job_name = "My Job"
+task_key = "my_task"
