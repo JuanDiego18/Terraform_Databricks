@@ -16,7 +16,7 @@ prefix = "development-juandiego"
 metastore_name = "juandiego-metastore"
 unity_metastore_owner = "juandiego.vargasrosales@databricks.com"
 
-Its strongly adviced to have secrets stored as environment variables. 
+Its strongly adviced to have secrets stored as environment variables within your github environment.
 
 2. Run the "terraform init" command to initialize the terraform working directory (initializes the backend, downloads provider plugins, installs chils modules,
 verifies the configuration, creates the .terraform directory and initializes state management)
