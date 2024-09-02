@@ -21,4 +21,4 @@ verifies the configuration, creates the .terraform directory and initializes sta
 
 3. Run terraform plan
 
-4. Run terraform apply if the plan doesn't display any erros
+4. Run terraform apply if the plan doesn't display any errors
