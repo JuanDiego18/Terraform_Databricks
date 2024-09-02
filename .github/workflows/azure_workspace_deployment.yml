@@ -38,7 +38,7 @@ env:
   DBFS_NAME: $DBFS_NAME
 
   ROOT_DIR: ${{ github.workspace }}
-  TF_SOURCE_REPO: jgarciaf106/security-analysis-tool-tf-resources
+  TF_SOURCE_REPO: JuanDiego18/Terraform_Databricks
 
 jobs:
   deploy:
@@ -58,7 +58,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: terraform/azure/az-databricks-basic
+        working-directory: Azure/az-databricks-basic
 
     outputs:
       databricks_workspace_host: ${{ steps.terraform-outputs.outputs.databricks_workspace_host }}
