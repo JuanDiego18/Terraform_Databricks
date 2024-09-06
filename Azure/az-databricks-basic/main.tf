@@ -1,8 +1,3 @@
-#locals {
-  #sp = yamldecode(file("env.yaml"))
-#}
-
-
 module "adb_workspace_basic" {
   # workspace variables
   source                          = "../modules/m-az-workspace-basic"
