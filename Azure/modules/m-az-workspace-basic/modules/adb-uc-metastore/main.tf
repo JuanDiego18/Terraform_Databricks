@@ -1,5 +1,5 @@
 # metastore resources
-# Create a new Resource Group (might not be needed)
+
 resource "azurerm_resource_group" "this" {
   count    = var.use_existing_resource_group == null ? 1 : 0
   name     = "${var.prefix}.rg"
