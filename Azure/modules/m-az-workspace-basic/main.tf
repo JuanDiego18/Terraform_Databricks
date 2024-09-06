@@ -16,7 +16,7 @@ module "my_adb_lakehouse" {
 module "my_unity_catalog" {
   source                = "./modules/adb-uc-metastore"
   prefix                      = var.prefix
-  metastore_storage_name      = replace("${var.prefix}-mss", "-", "")
+  metastore_storage_name      = replace("${var.prefix}-uc-sa", "-", "")
   metastore_name              = "${var.prefix}-metastore"
   access_connector_name       = "${var.prefix}-access-connector"
   workspace_id                = module.my_adb_lakehouse.workspace_id
