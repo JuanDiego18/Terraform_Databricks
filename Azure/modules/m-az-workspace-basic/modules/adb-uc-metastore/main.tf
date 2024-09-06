@@ -12,7 +12,7 @@ data "azurerm_resource_group" "this" {
   name  = var.use_existing_resource_group
 }
 
-#get the service principal data (already existing)
+#get the service principal data from databricks account (already existing)
 data "databricks_service_principal" "metastore_admin" {
   application_id = "2985a69b-9cba-4e57-962f-be39ba689309"  # Replace with your service principal's application ID
 }
