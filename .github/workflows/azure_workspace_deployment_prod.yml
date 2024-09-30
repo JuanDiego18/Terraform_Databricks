@@ -41,11 +41,11 @@ env:
 
 jobs:
   deploy:
-    name: Terraform -> Azure Workspace Deployment
+    name: Terraform -> Azure Workspace Deployment Prod
 
     if: github.event_name == 'pull_request' && github.event.action == 'opened'
 
-    environment: Azure
+    environment: Azure_prod
 
     permissions:
       contents: "read"
@@ -57,7 +57,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Azure/az-databricks-basic
+        working-directory: Azure/az-databricks-basic-production
 
     outputs:
       databricks_workspace_host: ${{ steps.terraform-outputs.outputs.databricks_workspace_host }}

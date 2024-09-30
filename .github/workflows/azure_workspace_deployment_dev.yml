@@ -1,0 +1,116 @@
+name: SAT Azure Workspace Deployment
+
+on:
+  push:
+    branches: 
+      - jd_dev
+
+
+
+env:
+  BACKEND_RG_NAME: ${{ secrets.BACKEND_RG_NAME }}
+  BACKEND_SA_NAME: ${{ secrets.BACKEND_SA_NAME }}
+  BACKEND_CONTAINER_NAME: ${{ secrets.BACKEND_CONTAINER_NAME }}
+  BACKEND_KEY: ${{ secrets.BACKEND_KEY }}
+
+
+  AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+  AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+  DATABRICKS_ACCOUNT_ID: ${{ secrets.DATABRICKS_ACCOUNT_ID }}
+  DATABRICKS_ACCOUNT_HOST: ${{ secrets.DATABRICKS_ACCOUNT_HOST }}
+  DATABRICKS_SP_CLIENT_ID: ${{ secrets.DATABRICKS_SP_CLIENT_ID }}
+  DATABRICKS_SP_CLIENT_SECRET: ${{ secrets.DATABRICKS_SP_CLIENT_SECRET }}
+
+  PREFIX: ${{ vars.PREFIX }}
+  LOCATION: ${{ vars.LOCATION }}
+  CREATE_RESOURCE_GROUP: ${{ vars.CREATE_RESOURCE_GROUP }}
+  SPOKE_RESOURCE_GROUP_NAME: ${{ vars.SPOKE_RESOURCE_GROUP_NAME }}
+  MANAGED_RESOURCE_GROUP_NAME: ${{ vars.MANAGED_RESOURCE_GROUP_NAME }}
+  ENVIRONMENT: ${{ vars.ENVIRONMENT }}
+  SPOKE_VNET_ADDRESS_SPACE: ${{ vars.SPOKE_VNET_ADDRESS_SPACE }}
+  SHARED_RESOURCE_GROUP_NAME: ${{ vars.SHARED_RESOURCE_GROUP_NAME }}
+  ADMIN: ${{ vars.ADMIN }}
+  DBFS_NAME: ${{ vars.DBFS_NAME }}
+
+  ROOT_DIR: ${{ github.workspace }}
+  TF_SOURCE_REPO: JuanDiego18/Terraform_Databricks
+
+jobs:
+  deploy:
+    name: Terraform -> Azure Workspace Deployment Dev
+
+    environment: Azure_dev
+
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+
+    defaults:
+      run:
+        working-directory: Azure/az-databricks-basic
+
+    outputs:
+      databricks_workspace_host: ${{ steps.terraform-outputs.outputs.databricks_workspace_host }}
+      databricks_workspace_id: ${{ steps.terraform-outputs.outputs.databricks_workspace_id }}
+      databricks_workspace_pat: ${{ steps.terraform-outputs.outputs.databricks_workspace_pat }}
+
+    steps:
+      - name: Checkout Workspace Terraform code
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.TF_SOURCE_REPO }}
+
+      - name: Azure Authentication
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Set execute permissions
+        run: chmod +x ws_tf_actions.sh
+
+      - name: Terraform Init
+        id: init
+        run: ./ws_tf_actions.sh init
+
+      - name: Terraform Validate
+        id: validate
+        run: ./ws_tf_actions.sh validate
+
+      - name: Terraform Plan
+        id: plan
+        run: ./ws_tf_actions.sh plan
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Terraform Apply
+        id: apply
+        run: ./ws_tf_actions.sh apply
+        continue-on-error: true
+
+      - name: Terraform Apply Status
+        if: steps.apply.outcome == 'failure'
+        run: exit 1
+
+      - name: Set Terraform Outputs
+        id: terraform-outputs
+        run: |
+          echo "databricks_workspace_host=$(terraform output -raw databricks_workpace_host)" >> "$GITHUB_OUTPUT"
+          echo "databricks_workspace_id=$(terraform output -raw databricks_workspace_id)"  >> "$GITHUB_OUTPUT"
+          echo "databricks_workspace_pat=$(terraform output -raw databricks_workspace_pat)" >> "$GITHUB_OUTPUT"
+
+      - name: Success
+        if: steps.apply.outcome == 'success'
+        run: echo "Workspace Deployment Successful"
