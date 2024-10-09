@@ -35,6 +35,7 @@ env:
   SHARED_RESOURCE_GROUP_NAME: ${{ vars.SHARED_RESOURCE_GROUP_NAME }}
   ADMIN: ${{ vars.ADMIN }}
   DBFS_NAME: ${{ vars.DBFS_NAME }}
+  METASTORE_ID: ${{ vars.METASTORE_ID }}
 
   ROOT_DIR: ${{ github.workspace }}
   TF_SOURCE_REPO: JuanDiego18/Terraform_Databricks

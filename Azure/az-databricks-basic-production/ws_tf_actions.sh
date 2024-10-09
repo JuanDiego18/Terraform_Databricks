@@ -34,6 +34,7 @@ VAR_ARGS=(
     -var="shared_resource_group_name=$SHARED_RESOURCE_GROUP_NAME"
     -var="admin_user=$ADMIN"
     -var="dbfsname=$DBFS_NAME"
+    -var="metastore_id=$METASTORE_ID"
 
 )
 
