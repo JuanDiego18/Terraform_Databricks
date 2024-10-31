@@ -15,7 +15,6 @@ variable "client_secret" {
   type        = string
   description = "Client secret for the service principal"
 }
-
 variable "tenant_id" {
   type        = string
   description = "Service Principal tenant_id"
@@ -24,7 +23,6 @@ variable "tenant_id" {
 variable "subscription_id" {
   type        = string
 }
-
 variable "dbx_client_id" {
   type        = string
   description = "Databricks Client ID"
@@ -33,7 +31,6 @@ variable "dbx_client_secret" {
   type        = string
   description = "Databricks Client Secret"
 }
-
 variable "create_resource_group" {
   type = bool
 }
