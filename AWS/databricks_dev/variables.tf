@@ -62,7 +62,3 @@ variable "unity_metastore_owner" {
   description = "(Required) Name of the principal that will be the owner of the Metastore"
   type        = string
 }
-
-# variable "metastore_id" {
-#   type        = string
-# }
