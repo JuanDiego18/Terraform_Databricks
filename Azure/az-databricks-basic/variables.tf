@@ -17,7 +17,6 @@ variable "tenant_id" {
   type        = string
   description = "Service Principal tenant_id"
 }
-
 variable "subscription_id" {
   type        = string
 }
