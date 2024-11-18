@@ -9,7 +9,6 @@ variable "client_id" {
   type        = string
   description = "Client Id for the service principal"
 }
-
 variable "client_secret" {
   type        = string
   description = "Client secret for the service principal"
