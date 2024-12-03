@@ -75,7 +75,6 @@ variable "account_id" {
 variable "dbfsname" {
   type        = string
 }
-
 variable "metastore_id" {
   type        = string
 }
