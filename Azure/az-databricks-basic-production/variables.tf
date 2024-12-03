@@ -67,7 +67,6 @@ variable "admin_user" {
   type        = string
   description = "The admin user for the Databricks workspace"
 }
-
 variable "account_id" {
   type        = string
   description = "Databricks Account ID"
