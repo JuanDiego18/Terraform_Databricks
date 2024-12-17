@@ -31,7 +31,6 @@ variable "dbx_client_secret" {
 variable "create_resource_group" {
   type = bool
 }
-
 variable "spoke_resource_group_name" {
   type        = string
   description = "(Required) The name of the Resource Group to create"
