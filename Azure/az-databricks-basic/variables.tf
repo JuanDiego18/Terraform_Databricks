@@ -52,7 +52,6 @@ variable "shared_resource_group_name" {
   type        = string
   description = "Name of the shared resource group"
 }
-
 variable "admin_user" {
   type        = string
   description = "The admin user for the Databricks workspace"
