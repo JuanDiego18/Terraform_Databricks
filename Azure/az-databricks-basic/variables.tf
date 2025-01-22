@@ -44,7 +44,6 @@ variable "environment_name" {
   type        = string
   description = "(Required) The name of the project environment associated with the infrastructure to be managed by Terraform"
 }
-
 variable "spoke_vnet_address_space" {
   type        = string
   description = "(Required) The address space for the spoke Virtual Network"
