@@ -6,6 +6,7 @@ variable "location" {
   type        = string
   description = "(Required) The location for the resources in this module"
 }
+
 variable "client_id" {
   type        = string
   description = "Client Id for the service principal"
