@@ -30,6 +30,7 @@ variable "dbx_client_id" {
   type        = string
   description = "Databricks Client ID"
 }
+
 variable "dbx_client_secret" {
   type        = string
   description = "Databricks Client Secret"
