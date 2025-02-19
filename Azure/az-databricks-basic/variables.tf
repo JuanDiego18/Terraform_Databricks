@@ -54,6 +54,7 @@ variable "spoke_vnet_address_space" {
   type        = string
   description = "(Required) The address space for the spoke Virtual Network"
 }
+
 variable "shared_resource_group_name" {
   type        = string
   description = "Name of the shared resource group"
