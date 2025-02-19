@@ -25,6 +25,7 @@ variable "tenant_id" {
 variable "subscription_id" {
   type        = string
 }
+
 variable "dbx_client_id" {
   type        = string
   description = "Databricks Client ID"
