@@ -14,7 +14,7 @@ data "azurerm_resource_group" "this" {
 
 #get the service principal data (already existing)
 data "databricks_service_principal" "metastore_admin" {
-  application_id = "6e0158a6-3b03-4e2c-b9d2-ef169667b950"  # Replace with your service principal's application ID
+  application_id = "6e0158a6-3b03-4e2c-b9d2-ef169667b950"  # Replace with your existing service principal's application ID
 }
 
 locals {
