@@ -35,6 +35,7 @@ variable "dbx_client_secret" {
   type        = string
   description = "Databricks Client Secret"
 }
+
 variable "create_resource_group" {
   type = bool
 }
